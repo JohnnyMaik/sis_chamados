@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const pool = require('./database/db');
+const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 app.use(express.json());
@@ -19,6 +20,8 @@ app.get('/db', async (req, res) => {
     res.status(500).json({ db: 'erro', detail: err.message });
   }
 });
+
+app.use(userRoutes);
 
 const PORT = Number(process.env.PORT || 3000);
 app.listen(PORT, () => {
